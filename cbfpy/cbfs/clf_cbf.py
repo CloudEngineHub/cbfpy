@@ -45,6 +45,7 @@ from jax import Array
 from jax.typing import ArrayLike
 import numpy as np
 import qpax
+import elastiqp.jax
 
 from cbfpy.config.clf_cbf_config import CLFCBFConfig
 from cbfpy.utils.general_utils import print_warning
@@ -98,6 +99,7 @@ class CLFCBF:
         H: Callable[[ArrayLike], Array],
         F: Callable[[ArrayLike], Array],
         solver_tol: float,
+        backend: str,
     ):
         self.n = n
         self.m = m
@@ -122,6 +124,7 @@ class CLFCBF:
         self.H = H
         self.F = F
         self.solver_tol = solver_tol
+        self.backend = backend
 
     @classmethod
     def from_config(cls, config: CLFCBFConfig) -> "CLFCBF":
@@ -158,6 +161,7 @@ class CLFCBF:
             config.H,
             config.F,
             config.solver_tol,
+            config.backend,
         )
         instance._validate_instance(*config.init_args, **config.init_kwargs)
         return instance
@@ -196,25 +200,35 @@ class CLFCBF:
             Array: Safe control input, shape (m,)
         """
         P, q, A, b, G, h = self.qp_data(z, z_des, *args, **kwargs)
-        if self.relax_qp:
-            x_qp = qpax.solve_qp_elastic_primal(
+        if self.backend == "elastiqp":
+            x_qp = elastiqp.jax.solve(
                 P,
                 q,
                 G,
                 h,
                 penalty=jnp.asarray(self.constraint_relaxation_penalties),
-                solver_tol=self.solver_tol,
-            )
-        else:
-            x_qp, s_qp, z_qp, y_qp, converged, iters = qpax.solve_qp(
-                P,
-                q,
-                A,
-                b,
-                G,
-                h,
-                solver_tol=self.solver_tol,
-            )
+                eps_abs=self.solver_tol,
+            ).x
+        else:  # qpax
+            if self.relax_qp:
+                x_qp = qpax.solve_qp_elastic_primal(
+                    P,
+                    q,
+                    G,
+                    h,
+                    penalty=jnp.asarray(self.constraint_relaxation_penalties),
+                    solver_tol=self.solver_tol,
+                )
+            else:
+                x_qp, s_qp, z_qp, y_qp, converged, iters = qpax.solve_qp(
+                    P,
+                    q,
+                    A,
+                    b,
+                    G,
+                    h,
+                    solver_tol=self.solver_tol,
+                )
         return x_qp[: self.m]
 
     def h(self, z: ArrayLike, *args, **kwargs) -> Array:

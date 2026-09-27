@@ -39,7 +39,13 @@ class PointRobotConfig(CBFConfig):
         self.mass = 1.0
         self.pos_min = jnp.array([-1.0, -1.0, -1.0])
         self.pos_max = jnp.array([1.0, 1.0, 1.0])
-        super().__init__(n=6, m=3)
+        super().__init__(
+            n=6,
+            m=3,
+            # This demo runs on CPU, and elastiqp is a great option for CPU solves
+            backend="elastiqp",
+            solver_tol=1e-6,  # ElastiQP can handle tighter tolerances for qpax
+        )
 
     def f(self, z):
         A = jnp.block(

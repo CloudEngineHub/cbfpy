@@ -25,9 +25,10 @@ Documentation = "https://stanfordasl.github.io/cbfpy/"
 Repository = "https://github.com/StanfordASL/cbfpy/"
 
 [project.optional-dependencies]
+elastiqp = ["elastiqp[jax]"]
 examples = [
-    # Note: older versions of Pybullet have trouble with numpy 2.0
-    "pybullet>=3.2.7",
+    "elastiqp[jax]",
+    "pybullet>=3.2.7", # For numpy 2.0+
     "pygame",
     # "gym_pybullet_drones @ git+https://github.com/danielpmorton/gym-pybullet-drones.git",
     "matplotlib",

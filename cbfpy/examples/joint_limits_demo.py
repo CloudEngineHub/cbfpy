@@ -41,7 +41,13 @@ class JointLimitsConfig(CBFConfig):
         self.q_max = np.pi / 2 * np.ones(self.num_joints)
         # Pad joint limts (to better evauate CBF performance)
         self.padding = 0.3
-        super().__init__(n=self.num_joints, m=self.num_joints)
+        super().__init__(
+            n=self.num_joints,
+            m=self.num_joints,
+            # This demo runs on CPU, and elastiqp is a great option for CPU solves
+            backend="elastiqp",
+            solver_tol=1e-6,  # ElastiQP can handle tighter tolerances for qpax
+        )
 
     def f(self, z):
         return jnp.zeros(self.num_joints)

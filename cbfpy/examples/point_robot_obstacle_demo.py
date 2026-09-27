@@ -44,6 +44,9 @@ class PointRobotObstacleConfig(CBFConfig):
             n=6,  # State = [position, velocity]
             m=3,  # Control = [force]
             init_args=(init_z_obs,),
+            # This demo runs on CPU, and elastiqp is a great option for CPU solves
+            backend="elastiqp",
+            solver_tol=1e-6,  # ElastiQP can handle tighter tolerances for qpax
         )
 
     def f(self, z, *args, **kwargs):

@@ -31,6 +31,14 @@ on the CLF relaxation.
 
 If strict enforcement of the CLF-CBF is desired, your higest-level controller should handle the case where the QP
 is infeasible.
+
+## Backends:
+
+The CLF-CBF-QP can use either qpax or elastiqp, two different QP solvers, both of which are well-suited for these
+problems. The original backend (and the current default) is qpax, which can run on both CPU and GPU due to
+being fully written in JAX. ElastiQP only runs on CPU, and only in float64 precision, but has better performance
+than qpax on most problems. ElastiQP also always uses an l1-relaxed problem structure, and does not report
+infeasibility.
 """
 
 from typing import Optional
@@ -75,6 +83,7 @@ class CLFCBFConfig(CBFConfig):
         control_relaxation_penalty (float, optional): Penalty on the control constraint slack variables in the
             relaxed QP. Defaults to 1e5. Note: only applies if relax_qp is True.
         solver_tol (float, optional): Tolerance for the QP solver. Defaults to 1e-3.
+        backend (str, optional): QP backend, either 'qpax' or 'elastiqp'. Defaults to 'qpax'
         init_args (tuple, optional): If your barriers or dynamics rely on additional (non-differentiable, static shape)
             args other than just the state, include an initial seed for these args here. Defaults to None.
         init_kwargs (dict, optional): If your barriers or dynamics rely on additional (non-differentiable, static shape)
@@ -92,6 +101,7 @@ class CLFCBFConfig(CBFConfig):
         clf_relaxation_penalty: float = 1e2,
         control_relaxation_penalty: float = 1e5,
         solver_tol: float = 1e-3,
+        backend: str = "qpax",
         init_args: Optional[tuple] = None,
         init_kwargs: Optional[dict] = None,
     ):
@@ -104,6 +114,7 @@ class CLFCBFConfig(CBFConfig):
             cbf_relaxation_penalty,
             control_relaxation_penalty,
             solver_tol,
+            backend,
             init_args,
             init_kwargs,
         )
