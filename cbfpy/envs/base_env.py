@@ -39,7 +39,6 @@ class BaseEnv(ABC):
 
         This should update any dynamics and visuals
         """
-        pass
 
     @abstractmethod
     def get_state(self) -> ArrayLike:
@@ -48,7 +47,6 @@ class BaseEnv(ABC):
         Returns:
             ArrayLike: State, shape (n,)
         """
-        pass
 
     @abstractmethod
     def get_desired_state(self) -> ArrayLike:
@@ -57,7 +55,6 @@ class BaseEnv(ABC):
         Returns:
             ArrayLike: Desired state, shape (n,)
         """
-        pass
 
     @abstractmethod
     def apply_control(self, u: ArrayLike) -> None:
@@ -66,4 +63,3 @@ class BaseEnv(ABC):
         Args:
             u (ArrayLike): Control, shape (m,)
         """
-        pass

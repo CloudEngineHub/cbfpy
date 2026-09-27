@@ -8,10 +8,11 @@ import time
 import warnings
 
 import numpy as np
-import pybullet
-from pybullet_utils.bullet_client import BulletClient
-from jax.typing import ArrayLike
 from jax import Array
+from jax.typing import ArrayLike
+from pybullet_utils.bullet_client import BulletClient
+
+import pybullet
 
 # Note: the original gym_pybullet_drones repo has a lot of dependencies that are not necessary for this demo.
 # Use the fork at https://github.com/danielpmorton/gym-pybullet-drones instead
@@ -23,9 +24,9 @@ except ImportError as e:
         + "\n'pip install 'gym_pybullet_drones @ git+https://github.com/danielpmorton/gym-pybullet-drones.git''"
     ) from e
 
-from cbfpy.utils.visualization import visualize_3D_box
 from cbfpy.envs.base_env import BaseEnv
 from cbfpy.utils.general_utils import find_assets_dir, stdout_redirected
+from cbfpy.utils.visualization import visualize_3D_box
 
 
 class DroneEnv(BaseEnv):

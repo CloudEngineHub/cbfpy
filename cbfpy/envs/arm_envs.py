@@ -6,11 +6,11 @@ but more will be added in the future
 """
 
 import numpy as np
-import pybullet
 from pybullet_utils.bullet_client import BulletClient
 
-from cbfpy.utils.general_utils import find_assets_dir, stdout_redirected
+import pybullet
 from cbfpy.envs.base_env import BaseEnv
+from cbfpy.utils.general_utils import find_assets_dir, stdout_redirected
 
 URDF = find_assets_dir() + "three_dof_arm.urdf"
 

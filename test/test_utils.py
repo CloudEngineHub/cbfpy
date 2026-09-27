@@ -1,11 +1,11 @@
 """Unit tests for utility functions"""
 
 import unittest
-import numpy as np
+
 import jax
+import numpy as np
 
-import cbfpy.utils.math_utils as math_utils
-
+from cbfpy.utils import math_utils
 
 TEST_JIT = False
 

@@ -1,18 +1,18 @@
 """Tools for visualizing shapes in Pybullet"""
 
-from typing import Optional
 
 import numpy as np
 import numpy.typing as npt
-import pybullet
 from pybullet_utils.bullet_client import BulletClient
+
+import pybullet
 
 
 def visualize_3D_box(
     box: npt.ArrayLike,
-    padding: Optional[npt.ArrayLike] = None,
+    padding: npt.ArrayLike | None = None,
     rgba: npt.ArrayLike = (1, 0, 0, 0.5),
-    client: Optional[BulletClient] = None,
+    client: BulletClient | None = None,
 ) -> int:
     """Visualize a box in Pybullet
 
@@ -49,7 +49,7 @@ def create_box(
     sidelengths: npt.ArrayLike,
     use_collision: bool,
     rgba: npt.ArrayLike = (1, 1, 1, 1),
-    client: Optional[BulletClient] = None,
+    client: BulletClient | None = None,
 ) -> int:
     """Creates a rigid box in the Pybullet simulation
 

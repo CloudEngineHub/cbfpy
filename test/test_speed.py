@@ -17,16 +17,17 @@ os.environ["JAX_ENABLE_X64"] = "True"
 os.environ["JAX_PLATFORMS"] = "cpu"
 
 
-import unittest
-from typing import Callable
 import time
-import jax
-import numpy as np
-import matplotlib.pyplot as plt
+import unittest
+from collections.abc import Callable
 
-from cbfpy import CBF, CLFCBF
-import cbfpy.examples.point_robot_demo as prdemo
+import jax
+import matplotlib.pyplot as plt
+import numpy as np
+
 import cbfpy.examples.adaptive_cruise_control_demo as accdemo
+import cbfpy.examples.point_robot_demo as prdemo
+from cbfpy import CBF, CLFCBF
 
 # Seed RNG for repeatability
 np.random.seed(0)

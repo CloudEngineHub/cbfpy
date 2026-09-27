@@ -3,8 +3,8 @@
 import os
 import sys
 import warnings
-from enum import Enum
 from contextlib import contextmanager
+from enum import Enum
 
 
 class ANSITextStyles(Enum):

@@ -37,14 +37,14 @@ subject to LfV(z) + LgV(z)u <= -gamma(V(z)) + delta  # CLF Constraint
 where `p` is a large constant and `delta` is the slack variable.
 """
 
-from typing import Tuple, Callable, Optional
+from collections.abc import Callable
 
 import jax
 import jax.numpy as jnp
-from jax import Array
-from jax.typing import ArrayLike
 import numpy as np
 import qpax
+from jax import Array
+from jax.typing import ArrayLike
 
 from cbfpy.config.clf_cbf_config import CLFCBFConfig
 from cbfpy.utils.general_utils import print_warning
@@ -86,8 +86,8 @@ class CLFCBF:
         m: int,
         num_cbf: int,
         num_clf: int,
-        u_min: Optional[tuple],
-        u_max: Optional[tuple],
+        u_min: tuple | None,
+        u_max: tuple | None,
         control_constrained: bool,
         relax_qp: bool,
         clf_relaxation_penalty: float,
@@ -260,7 +260,7 @@ class CLFCBF:
 
     def h_and_Lfh(  # pylint: disable=invalid-name
         self, z: ArrayLike, *args, **kwargs
-    ) -> Tuple[Array, Array]:
+    ) -> tuple[Array, Array]:
         """Lie derivative of the barrier function(s) wrt the autonomous dynamics `f(z)`
 
         The evaluation of the barrier function is also returned "for free", a byproduct of the jacobian-vector-product
@@ -325,7 +325,7 @@ class CLFCBF:
 
     def V_and_LfV(
         self, z: ArrayLike, z_des: ArrayLike, *args, **kwargs
-    ) -> Tuple[Array, Array]:
+    ) -> tuple[Array, Array]:
         """Lie derivative of the CLF wrt the autonomous dynamics `f(z)`
 
         The evaluation of the CLF is also returned "for free", a byproduct of the jacobian-vector-product
@@ -465,7 +465,7 @@ class CLFCBF:
 
     def qp_data(
         self, z: Array, z_des: Array, *args, **kwargs
-    ) -> Tuple[Array, Array, Array, Array, Array, Array]:
+    ) -> tuple[Array, Array, Array, Array, Array, Array]:
         """Constructs the QP matrices based on the current state and desired control
 
         i.e. the matrices/vectors (P, q, A, b, G, h) for the optimization problem:

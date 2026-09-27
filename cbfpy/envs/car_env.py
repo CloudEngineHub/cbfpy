@@ -4,7 +4,6 @@
 Simple simulation of a leader-follower vehicle system for adaptive cruise control testing
 """
 
-from typing import Tuple
 
 import numpy as np
 import pygame
@@ -76,7 +75,7 @@ class VehicleEnv(BaseEnv):
         self,
         controller_name: str,
         mass: float = 1650.0,
-        drag_coeffs: Tuple[float, float, float] = (0.1, 5.0, 0.25),
+        drag_coeffs: tuple[float, float, float] = (0.1, 5.0, 0.25),
         v_des: float = 24.0,
         init_leader_pos: float = 0.0,
         init_leader_vel: float = 14.0,

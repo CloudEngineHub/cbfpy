@@ -17,11 +17,11 @@ os.environ["JAX_ENABLE_X64"] = "True"
 os.environ["JAX_PLATFORMS"] = "cpu"
 
 
-import numpy as np
 import jax
 import jax.numpy as jnp
-from jax import Array
 import matplotlib.pyplot as plt
+import numpy as np
+from jax import Array
 from matplotlib.lines import Line2D
 
 from cbfpy import CBF, CBFConfig

@@ -2,16 +2,16 @@
 # Simulation environments for point robots
 """
 
+import jax.numpy as jnp
 import numpy as np
 from jax import Array
-import jax.numpy as jnp
 from jax.typing import ArrayLike
-import pybullet
 from pybullet_utils.bullet_client import BulletClient
 
-from cbfpy.utils.visualization import visualize_3D_box
+import pybullet
 from cbfpy.envs.base_env import BaseEnv
 from cbfpy.utils.general_utils import find_assets_dir, stdout_redirected
+from cbfpy.utils.visualization import visualize_3D_box
 
 
 class PointRobotEnv(BaseEnv):

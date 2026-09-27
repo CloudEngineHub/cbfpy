@@ -23,9 +23,10 @@ os.environ["JAX_PLATFORMS"] = "cpu"
 
 
 import time
+
 import jax
-from jax import Array
 import jax.numpy as jnp
+from jax import Array
 from jax.typing import ArrayLike
 
 from cbfpy import CBF, CBFConfig

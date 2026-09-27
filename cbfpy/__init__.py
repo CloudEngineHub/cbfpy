@@ -2,9 +2,9 @@
 
 import os
 import warnings
-from packaging import version
 
 import jax
+from packaging import version
 
 from cbfpy.cbfs.cbf import CBF
 from cbfpy.cbfs.clf_cbf import CLFCBF

@@ -44,12 +44,12 @@ than qpax on most problems. ElastiQP also always uses an l1-relaxed problem stru
 infeasibility.
 """
 
-from typing import Optional, Callable
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 
-import numpy as np
 import jax
 import jax.numpy as jnp
+import numpy as np
 from jax import Array
 from jax.typing import ArrayLike
 
@@ -93,15 +93,15 @@ class CBFConfig(ABC):
         self,
         n: int,
         m: int,
-        u_min: Optional[ArrayLike] = None,
-        u_max: Optional[ArrayLike] = None,
+        u_min: ArrayLike | None = None,
+        u_max: ArrayLike | None = None,
         relax_qp: bool = True,
         cbf_relaxation_penalty: float = 1e3,
         control_relaxation_penalty: float = 1e5,
         solver_tol: float = 1e-3,
         backend: str = "qpax",
-        init_args: Optional[tuple] = None,
-        init_kwargs: Optional[dict] = None,
+        init_args: tuple | None = None,
+        init_kwargs: dict | None = None,
     ):
         if not (isinstance(n, int) and n > 0):
             raise ValueError(f"n must be a positive integer. Got: {n}")
@@ -288,7 +288,6 @@ class CBFConfig(ABC):
         Returns:
             Array: Uncontrolled state derivative component, shape (n,)
         """
-        pass
 
     @abstractmethod
     def g(self, z: ArrayLike, *args, **kwargs) -> Array:
@@ -302,7 +301,6 @@ class CBFConfig(ABC):
         Returns:
             Array: Control matrix, shape (n, m)
         """
-        pass
 
     ## Barriers ##
 

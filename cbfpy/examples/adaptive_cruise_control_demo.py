@@ -28,13 +28,13 @@ os.environ["JAX_ENABLE_X64"] = "True"
 os.environ["JAX_PLATFORMS"] = "cpu"
 
 
-from jax import Array
 import jax.numpy as jnp
+from jax import Array
 from jax.typing import ArrayLike
 
-from cbfpy.envs.car_env import VehicleEnv
-from cbfpy.config.clf_cbf_config import CLFCBFConfig
 from cbfpy.cbfs.clf_cbf import CLFCBF
+from cbfpy.config.clf_cbf_config import CLFCBFConfig
+from cbfpy.envs.car_env import VehicleEnv
 
 
 class ACCConfig(CLFCBFConfig):
