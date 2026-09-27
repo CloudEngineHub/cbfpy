@@ -35,11 +35,13 @@ def check_env_vars():
             + "These are optional, but should lead to better precision and speed. "
             + "See the cbfpy README for more details."
         )
-        if not before_jax_0_4_32:
-            msg += (
-                f"\n- Detected JAX version {jax_version}. "
-                + "Consider using a version before JAX 0.4.32 for best CPU performance."
-            )
+        # Note: commenting this check out now that we have ElastiQP which improves
+        # CPU performance but only works with newer JAX versions
+        # if not before_jax_0_4_32:
+        #     msg += (
+        #         f"\n- Detected JAX version {jax_version}. "
+        #         + "Consider using a version before JAX 0.4.32 for best CPU performance."
+        #     )
         if not x64_enabled:
             msg += (
                 "\n- JAX_ENABLE_X64 not detected. Recommendation: set JAX_ENABLE_X64=1"
@@ -55,10 +57,8 @@ def check_env_vars():
                 + "Recommendation: set OPENBLAS_NUM_THREADS=1"
             )
         should_warn = (
-            not before_jax_0_4_32
-            or not x64_enabled
-            or not single_thread_eigen
-            or not single_thread_blas
+            # not before_jax_0_4_32
+            not x64_enabled or not single_thread_eigen or not single_thread_blas
         )
         if should_warn:
             warnings.warn(msg, stacklevel=2)

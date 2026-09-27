@@ -53,7 +53,8 @@ If you are working on Apple silicon and have issues installing Jax, the followin
 As with [`frax`](https://github.com/StanfordASL/frax), I have a few tips for maximizing performance:
 
 - For best performance on a single, non-batched evaluation, use CPU rather than GPU/TPU. To do so, set `JAX_PLATFORMS="cpu"`
-- For best performance on CPU, use a version of JAX before `0.4.32`. I recommend `0.4.30`
+- For best performance on CPU, use a version of JAX before `0.4.32`. I recommend `0.4.30`. 
+    - **Note**: This is mainly critical if using `qpax` as the solver backend. Setting [ElastiQP](https://github.com/StanfordASL/elastiqp) as the backend significantly improves CPU solve times, but ElastiQP requires `jax>=0.9.1`. Essentially, if you choose ElastiQP, you will have much faster QP solves, at the cost of slightly more expensive Jacobian computations. Usually, the bottleneck is the QP solve, so this is probably a worthwhile tradeoff.
 - For accurate QP solutions, I recommend enabling double precision with `JAX_ENABLE_X64=True`. **Note**: Previous versions of CBFpy forced double precision globally; we now leave this choice up to the user
 - On CPU, it's probably faster to run on a single thread (these problems are small, and dispatching work to multiple threads introduces more overhead than it is worth). To do so, set `XLA_FLAGS="--xla_cpu_multi_thread_eigen=false"` and `OPENBLAS_NUM_THREADS=1`
 
