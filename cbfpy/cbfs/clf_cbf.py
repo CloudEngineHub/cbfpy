@@ -45,10 +45,16 @@ from jax import Array
 from jax.typing import ArrayLike
 import numpy as np
 import qpax
-import elastiqp.jax
 
 from cbfpy.config.clf_cbf_config import CLFCBFConfig
 from cbfpy.utils.general_utils import print_warning
+
+try:
+    import elastiqp.jax
+
+    ELASTIQP_INSTALLED = True
+except ImportError:
+    ELASTIQP_INSTALLED = False
 
 
 @jax.tree_util.register_static
@@ -201,6 +207,7 @@ class CLFCBF:
         """
         P, q, A, b, G, h = self.qp_data(z, z_des, *args, **kwargs)
         if self.backend == "elastiqp":
+            assert ELASTIQP_INSTALLED
             x_qp = elastiqp.jax.solve(
                 P,
                 q,
