@@ -77,6 +77,11 @@ class PointRobotEnv(BaseEnv):
     def get_desired_state(self) -> Array:
         target_pos = self.client.getBasePositionAndOrientation(self.target)[0]
         target_vel = self.client.getBaseVelocity(self.target)[0]
+
+        # HACK: reset the angular vel of the target to 0
+        # Sometimes, the target can start spinning out of control -- this fixes that
+        self.client.resetBaseVelocity(self.target, target_vel, [0, 0, 0])
+
         return np.array([*target_pos, *target_vel])
 
     def apply_control(self, u: Array) -> None:
