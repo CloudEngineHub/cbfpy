@@ -105,16 +105,17 @@ Additional tuning parameters/functions can be found in the `CBFConfig` documenta
 import jax.numpy as jnp
 from cbfpy import CBF, CBFConfig
 
+
 # Create a config class for your problem inheriting from the CBFConfig class
 class MyCBFConfig(CBFConfig):
     def __init__(self):
         super().__init__(
             # Define the state and control dimensions
-            n = 2, # [x, x_dot]
-            m = 1, # [F_x]
+            n=2,  # [x, x_dot]
+            m=1,  # [F_x]
             # Define control limits (if desired)
-            u_min = None,
-            u_max = None,
+            u_min=None,
+            u_max=None,
         )
 
     # Define the control-affine dynamics functions `f` and `g` for your system
@@ -146,7 +147,7 @@ while True:
     u_nom = nominal_controller(z, z_des)
     u = cbf.safety_filter(z, u_nom)
     apply_control(u)
-    step() 
+    step()
 ```
 
 ## Examples
