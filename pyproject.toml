@@ -30,7 +30,6 @@ examples = [
     "pybullet>=3.2.7",
     "pygame",
     # "gym_pybullet_drones @ git+https://github.com/danielpmorton/gym-pybullet-drones.git",
-    "wheel",
     "matplotlib",
 ]
 dev = ["mkdocs-material", "mkdocstrings[python]", "ruff"]
