@@ -1,8 +1,8 @@
 site_name: "CBFpy"
 site_description: "Control Barrier Functions in Python"
-site_url: "https://danielpmorton.github.io/cbfpy"
-repo_url: "https://github.com/danielpmorton/cbfpy"
-repo_name: "danielpmorton/cbfpy"
+site_url: "https://stanfordasl.github.io/cbfpy"
+repo_url: "https://github.com/StanfordASL/cbfpy"
+repo_name: "StanfordASL/cbfpy"
 site_dir: "site"
 
 plugins:

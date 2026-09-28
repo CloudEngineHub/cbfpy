@@ -10,7 +10,7 @@ CBFpy is an easy-to-use and high-performance framework for constructing and solv
 - Accelerated linear algebra operations with [XLA](https://openxla.org/xla)
 - Automatic differentiation
 
-For API reference, see the following [documentation](https://danielpmorton.github.io/cbfpy)
+For API reference, see the following [documentation](https://stanfordasl.github.io/cbfpy)
 
 If you use CBFpy in your research, please cite the following [paper](https://arxiv.org/abs/2503.06736):
 
@@ -37,10 +37,10 @@ pip install cbfpy
 
 ### From source
 
-A virtual environment is optional, but highly recommended. For `pyenv` installation instructions, see [here](https://danielpmorton.github.io/cbfpy/pyenv).
+A virtual environment is optional, but highly recommended. For `pyenv` installation instructions, see [here](https://stanfordasl.github.io/cbfpy/pyenv).
 
 ```
-git clone https://github.com/danielpmorton/cbfpy
+git clone https://github.com/StanfordASL/cbfpy
 cd cbfpy
 pip install -e ".[examples]"
 ```
@@ -152,9 +152,9 @@ while True:
 
 ## Examples
 
-These can be found in the `examples` folder [here](https://github.com/danielpmorton/cbfpy/tree/main/cbfpy/examples)
+These can be found in the `examples` folder [here](https://github.com/StanfordASL/cbfpy/tree/main/cbfpy/examples)
 
-### [Adaptive Cruise Control](https://github.com/danielpmorton/cbfpy/blob/main/cbfpy/examples/adaptive_cruise_control_demo.py)
+### [Adaptive Cruise Control](https://github.com/StanfordASL/cbfpy/blob/main/cbfpy/examples/adaptive_cruise_control_demo.py)
 
 Use a CLF-CBF to maintain a safe follow distance to the vehicle in front, while tracking a desired velocity
 
@@ -162,9 +162,9 @@ Use a CLF-CBF to maintain a safe follow distance to the vehicle in front, while 
 - Control: u = [Follower wheel force] (m = 1)
 - Relative degree: 1
 
-![Image: Adaptive cruise control](https://raw.githubusercontent.com/danielpmorton/cbfpy/refs/heads/main/images/acc_safe.gif)
+![Image: Adaptive cruise control](https://raw.githubusercontent.com/StanfordASL/cbfpy/refs/heads/main/images/acc_safe.gif)
 
-### [Point Robot Safe-Set Containment](https://github.com/danielpmorton/cbfpy/blob/main/cbfpy/examples/point_robot_demo.py)
+### [Point Robot Safe-Set Containment](https://github.com/StanfordASL/cbfpy/blob/main/cbfpy/examples/point_robot_demo.py)
 
 Use a CBF to enforce that a point robot stays within a safe box, while a PD controller attempts to reduce the distance to a target position
 
@@ -172,9 +172,9 @@ Use a CBF to enforce that a point robot stays within a safe box, while a PD cont
 - Control: u = [Force] (m = 3)
 - Relative degree: 2
 
-![Image: Point robot in a safe set](https://raw.githubusercontent.com/danielpmorton/cbfpy/refs/heads/main/images/point_robot_safe.gif)
+![Image: Point robot in a safe set](https://raw.githubusercontent.com/StanfordASL/cbfpy/refs/heads/main/images/point_robot_safe.gif)
 
-### [Point Robot Obstacle Avoidance](https://github.com/danielpmorton/cbfpy/blob/main/cbfpy/examples/point_robot_obstacle_demo.py)
+### [Point Robot Obstacle Avoidance](https://github.com/StanfordASL/cbfpy/blob/main/cbfpy/examples/point_robot_obstacle_demo.py)
 
 Use a CBF to keep a point robot inside a safe box, while avoiding a moving obstacle. The nominal PD controller attempts to keep the robot at the origin.
 
@@ -183,9 +183,9 @@ Use a CBF to keep a point robot inside a safe box, while avoiding a moving obsta
 - Relative degree: 1 + 2 (1 for obstacle avoidance, 2 for safe set containment)
 - Additional data: The state of the obstacle (position and velocity)
 
-![Image: Point robot avoiding an obstacle](https://raw.githubusercontent.com/danielpmorton/cbfpy/refs/heads/main/images/point_robot_obstacle.gif)
+![Image: Point robot avoiding an obstacle](https://raw.githubusercontent.com/StanfordASL/cbfpy/refs/heads/main/images/point_robot_obstacle.gif)
 
-### [Manipulator Joint Limit Avoidance](https://github.com/danielpmorton/cbfpy/blob/main/cbfpy/examples/joint_limits_demo.py)
+### [Manipulator Joint Limit Avoidance](https://github.com/StanfordASL/cbfpy/blob/main/cbfpy/examples/joint_limits_demo.py)
 
 Use a CBF to keep a manipulator operating within its joint limits, even if a nominal joint trajectory is unsafe. 
 
@@ -193,9 +193,9 @@ Use a CBF to keep a manipulator operating within its joint limits, even if a nom
 - Control: u = [Joint velocities] (m = 3)
 - Relative degree: 1
 
-![Image: 3-DOF manipulator avoiding joint limits](https://raw.githubusercontent.com/danielpmorton/cbfpy/refs/heads/main/images/joint_limits.png)
+![Image: 3-DOF manipulator avoiding joint limits](https://raw.githubusercontent.com/StanfordASL/cbfpy/refs/heads/main/images/joint_limits.png)
 
-### [Drone Obstacle Avoidance](https://github.com/danielpmorton/cbfpy/blob/main/cbfpy/examples/drone_demo.py)
+### [Drone Obstacle Avoidance](https://github.com/StanfordASL/cbfpy/blob/main/cbfpy/examples/drone_demo.py)
 
 Use a CBF to keep a drone inside a safe box, while avoiding a moving obstacle. This is similar to the "point robot obstacle avoidance" demo, but with slightly different dynamics.
 
@@ -206,4 +206,4 @@ Use a CBF to keep a drone inside a safe box, while avoiding a moving obstacle. T
 
 This is the same CBF which was used in the ["Drone Fencing" demo](https://danielpmorton.github.io/drone_fencing/) at the Stanford Robotics center.
 
-![Image: Quadrotor avoiding an obstacle](https://raw.githubusercontent.com/danielpmorton/cbfpy/refs/heads/main/images/drone_demo.gif)
+![Image: Quadrotor avoiding an obstacle](https://raw.githubusercontent.com/StanfordASL/cbfpy/refs/heads/main/images/drone_demo.gif)
